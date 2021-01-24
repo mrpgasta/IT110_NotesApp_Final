@@ -2,6 +2,8 @@
     include 'dbconnect.php';
     include 'authenticate.php';
 
+    date_default_timezone_set('Asia/Manila');
+
     if($_POST['action']=='add_note'){
         try{
             $name = $_POST["data"]["name"];
@@ -10,7 +12,7 @@
             ///pdo
             $pdo->beginTransaction();
             $prepared_statement = $pdo->prepare("INSERT INTO notes_gasta(name, description, user_id, status, created_at) VALUES(?,?,?,?,?)");
-            $prepared_statement->execute(array($name, $description, $user_id, 1, date("Y-m-d h:i:sa")));
+            $prepared_statement->execute(array($name, $description, $user_id, 1, date("Y-m-d h:i:s")));
             $pdo->commit();
         }catch(Exception $e){
             $pdo->rollBack();
@@ -50,7 +52,7 @@
         try{
             $pdo->beginTransaction();
             $prepared_statement = $pdo->prepare("UPDATE notes_gasta SET name=?, description=?, updated_at=? WHERE id=?");
-            $prepared_statement->execute(array($_POST['data']['name'], $_POST['data']['description'], date("Y-m-d h:i:sa"), $_POST['data']['id']));
+            $prepared_statement->execute(array($_POST['data']['name'], $_POST['data']['description'], date("Y-m-d h:i:s"), $_POST['data']['id']));
             $pdo->commit();
             echo "edited";
         }catch(Exception $e){

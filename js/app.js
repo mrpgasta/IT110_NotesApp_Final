@@ -79,12 +79,23 @@ $(document).ready(function() {
                 success: function(data) {
                     Note.list = jQuery.parseJSON(data);
                     //console.log(data);
+                    var dateTime;
                     
                     $(".notes_list").empty();
                     $.each(Note.list, function(index, value) {
+
+                        if(value.updated_at == '0000-00-00 00:00:00'){
+                            dateTime = value.created_at;
+                        }else dateTime = "Updated at "+value.updated_at; 
+
                         $(".notes_list").append("<li class=\"note\">"+
                             "<div class=\"card\">"+
-                                "<div class=\"card-header\">"+value.name+"</div>"+
+                                "<div class=\"card-header\">"+
+                                value.name+
+                                "<p class=\"pull-right\">"+
+                                dateTime+
+                                "</p>"+
+                                "</div>"+
                                     "<div class=\"card-body clearfix\">"+
                                         "<p class=\"card-text\">"+value.description+"</p>"+
                                         "<button class=\"pull-right btn btn-primary m-1\">"+
