@@ -84,7 +84,7 @@ $(document).ready(function() {
                     $(".notes_list").empty();
                     $.each(Note.list, function(index, value) {
 
-                        if(value.updated_at == '0000-00-00 00:00:00'){
+                        if(value.status == '0'){
                             dateTime = value.created_at;
                         }else dateTime = "Updated at "+value.updated_at; 
 

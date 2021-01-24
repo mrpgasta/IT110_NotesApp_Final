@@ -12,7 +12,7 @@
             ///pdo
             $pdo->beginTransaction();
             $prepared_statement = $pdo->prepare("INSERT INTO notes_gasta(name, description, user_id, status, created_at) VALUES(?,?,?,?,?)");
-            $prepared_statement->execute(array($name, $description, $user_id, 1, date("Y-m-d h:i:s")));
+            $prepared_statement->execute(array($name, $description, $user_id, 0, date("Y-m-d h:i:s")));
             $pdo->commit();
         }catch(Exception $e){
             $pdo->rollBack();
@@ -24,7 +24,7 @@
 
         try{
 
-            $sql = "SELECT * FROM notes_gasta WHERE user_id = $user_id AND status = 1";
+            $sql = "SELECT * FROM notes_gasta WHERE user_id = $user_id";
             $stm = $pdo->query($sql);
             $rows = $stm->fetchAll(pdo::FETCH_ASSOC);
             echo json_encode($rows);
@@ -51,8 +51,8 @@
     
         try{
             $pdo->beginTransaction();
-            $prepared_statement = $pdo->prepare("UPDATE notes_gasta SET name=?, description=?, updated_at=? WHERE id=?");
-            $prepared_statement->execute(array($_POST['data']['name'], $_POST['data']['description'], date("Y-m-d h:i:s"), $_POST['data']['id']));
+            $prepared_statement = $pdo->prepare("UPDATE notes_gasta SET name=?, description=?, status=?, updated_at=? WHERE id=?");
+            $prepared_statement->execute(array($_POST['data']['name'], $_POST['data']['description'], 1 , date("Y-m-d h:i:s"), $_POST['data']['id']));
             $pdo->commit();
             echo "edited";
         }catch(Exception $e){
