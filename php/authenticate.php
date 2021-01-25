@@ -34,7 +34,7 @@
                     $_SESSION['loggedin'] = TRUE;
                     $_SESSION['name'] = $_POST['data']['username'];
                     $_SESSION['id'] = $id;
-                    echo number_format($_SESSION['id']), "\n";
+                    echo 'Valid';
                 } else {
                     // Incorrect password
                     echo 'Incorrect username and/or password!';

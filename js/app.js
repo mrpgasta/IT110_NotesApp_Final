@@ -15,7 +15,9 @@ $(document).ready(function() {
                 data:{ data: current_user, action: 'logIn'},
                 url: "php/authenticate.php",
                 success:function(data){
-                    location.href = "home.php";
+                    if(data == 'Valid'){
+                        location.href = "home.php";
+                    }else alert(data);
                 }
             })
         },
@@ -43,7 +45,10 @@ $(document).ready(function() {
                 data:{ data: new_user, action: 'register'},
                 url: "php/Note.php",
                 success:function(data){
-                    //location.href = "home.php";
+                    if(data == 'Registered Successfully!'){
+                        alert(data);
+                        location.href = "login.php";
+                    }
                 }
             })
         }
@@ -158,7 +163,7 @@ $(document).ready(function() {
         }
         else {
             Register.add($('#fullname').val(), $('#username').val(), $('#password').val());
-            alert('registered');
+            //alert("User Registered!");
             $('#fullname').val(""); 
             $('#username').val(""); 
             $('#password').val("");
@@ -171,7 +176,6 @@ $(document).ready(function() {
         }
         else if($('#username').val()!="" && $('#password').val()!=""){
             user.logIn($('#username').val(), $('#password').val());
-            // alert($('#password').val());
             $('#username').val(""); 
             $('#password').val("");
         }

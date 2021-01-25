@@ -2,7 +2,7 @@
     session_start();
     $session_value=(isset($_SESSION['id']))?$_SESSION['id']:'';
 
-?>'
+?>
 
 <!DOCTYPE html>
 <html lang="en">

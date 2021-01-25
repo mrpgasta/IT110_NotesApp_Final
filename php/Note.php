@@ -72,7 +72,8 @@
             $prepared_statement = $pdo->prepare("INSERT INTO user_gasta(fullname, username, password) VALUES(?, ?, ?)");
             $prepared_statement->execute(array($fullname, $username, $hashed_password));
             $pdo->commit();
-
+            
+            echo 'Registered Successfully!';
         }
         catch(Exception $e){
             $pdo->rollBack();
